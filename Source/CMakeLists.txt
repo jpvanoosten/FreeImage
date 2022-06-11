@@ -9,6 +9,12 @@ set( FREEIMAGE_VERSION ${FREEIMAGE_VERSION_MAJOR}.${FREEIMAGE_VERSION_MINOR}.${F
 
 project( FreeImage VERSION ${FREEIMAGE_VERSION} LANGUAGES C CXX )
 
+# Override PNG options.
+option(PNG_SHARED "Build shared lib" OFF)
+option(PNG_STATIC "Build static lib" ON)
+option(PNG_TESTS  "Build libpng tests" OFF)
+
+add_subdirectory( ZLib ) # ZLib is a dependency of other libraries, so make sure it's loaded first.
 add_subdirectory( LibJPEG )
 add_subdirectory( LibJXR )
 add_subdirectory( LibOpenJPEG )
@@ -17,7 +23,6 @@ add_subdirectory( LibRawLite )
 add_subdirectory( LibTIFF4 )
 add_subdirectory( LibWebP )
 add_subdirectory( OpenEXR )
-add_subdirectory( ZLib )
 
 set( HEADER_FILES
 	CacheFile.h
@@ -163,8 +168,7 @@ set( TOOLKIT_FILES
 
 source_group( "Toolkit Files" ${TOOLKIT_FILES} )
 
-# Create shared library
-add_library( FreeImage SHARED 
+set( ALL_FILES 
 	${HEADER_FILES}
 	${SOURCE_FILES}
 	${CONVERSION_SOURCE_FILES}
@@ -174,6 +178,9 @@ add_library( FreeImage SHARED
 	${QUANTIZERS_SOURCE_FILES}
 	${TOOLKIT_FILES}
 )
+
+# Create shared library
+add_library( FreeImage SHARED ${ALL_FILES} )
 
 target_link_libraries( FreeImage
 	PUBLIC LibJPEG LibJXR LibOpenJPEG LibPNG LibRaw LibTIFF4 LibWebP OpenEXR ZLib
@@ -189,16 +196,7 @@ target_include_directories( FreeImage
 )
 
 # Create static library
-add_library( FreeImageLib STATIC 
-	${HEADER_FILES}
-	${SOURCE_FILES}
-	${CONVERSION_SOURCE_FILES}
-	${METADATA_SOURCE_FILES}
-	${MULTIPAGING_SOURCE_FILES}
-	${PLUGINS_SOURCE_FILES}
-	${QUANTIZERS_SOURCE_FILES}
-	${TOOLKIT_FILES}
-)
+add_library( FreeImageLib STATIC ${ALL_FILES} )
 
 target_link_libraries( FreeImageLib
 	PUBLIC LibJPEG LibJXR LibOpenJPEG LibPNG LibRaw LibTIFF4 LibWebP OpenEXR ZLib
