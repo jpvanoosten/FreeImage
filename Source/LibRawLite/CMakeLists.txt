@@ -30,10 +30,6 @@ source_group( TREE ${CMAKE_CURRENT_SOURCE_DIR} PREFIX "Source Files" FILES ${SOU
 
 add_library( LibRaw STATIC ${HEADER_FILES} ${SOURCE_FILES} )
 
-target_include_directories( LibRaw 
-	PUBLIC ./
-)
-
 target_compile_definitions( LibRaw 
 	PRIVATE LIBRAW_NODLL
 )
