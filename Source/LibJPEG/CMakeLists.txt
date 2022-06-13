@@ -71,3 +71,7 @@ set( SOURCE_FILES
 )
 
 add_library( LibJPEG STATIC ${HEADER_FILES} ${SOURCE_FILES} )
+
+target_include_directories( LibJPEG
+	PUBLIC ./
+)

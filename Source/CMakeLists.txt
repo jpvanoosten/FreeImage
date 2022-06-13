@@ -9,11 +9,6 @@ set( FREEIMAGE_VERSION ${FREEIMAGE_VERSION_MAJOR}.${FREEIMAGE_VERSION_MINOR}.${F
 
 project( FreeImage VERSION ${FREEIMAGE_VERSION} LANGUAGES C CXX )
 
-# Override PNG options.
-option(PNG_SHARED "Build shared lib" OFF)
-option(PNG_STATIC "Build static lib" ON)
-option(PNG_TESTS  "Build libpng tests" OFF)
-
 add_subdirectory( ZLib ) # ZLib is a dependency of other libraries, so make sure it's loaded first.
 add_subdirectory( LibJPEG )
 add_subdirectory( LibJXR )
@@ -206,6 +201,6 @@ target_compile_definitions( FreeImageLib
 	PUBLIC FREEIMAGE_LIB
 )
 
-target_include_directories( FreeImage
+target_include_directories( FreeImageLib
 	PUBLIC ./
 )

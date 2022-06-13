@@ -2,9 +2,6 @@ cmake_minimum_required( VERSION 3.23.0 ) # Current version of CMake when this fi
 
 project( OpenEXR LANGUAGES CXX )
 
-# ZLib is a required package for this project.
-find_package( ZLib REQUIRED )
-
 set( HEADER_FILES
 	IlmBaseConfig.h
 	OpenEXRConfig.h
@@ -191,7 +188,7 @@ set( SOURCE_FILES
 	IexMath/IexMathFloatExc.cpp
 	IexMath/IexMathFpu.cpp
 	IlmImf/b44ExpLogTable.cpp
-	IlmImf/dwaLookups.cpp
+#	IlmImf/dwaLookups.cpp
 	IlmImf/ImfAcesFile.cpp
 	IlmImf/ImfAttribute.cpp
 	IlmImf/ImfB44Compressor.cpp
@@ -303,8 +300,7 @@ target_link_libraries( OpenEXR
 )
 
 target_include_directories( OpenEXR
-	PUBLIC ./ 
-	PRIVATE Half Iex IexMath IlmImf IlmThread Imath 
+	PUBLIC ./ Half Iex IexMath IlmImf IlmThread Imath
 )
 
 if(WIN32)

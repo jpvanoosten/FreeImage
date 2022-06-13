@@ -45,7 +45,7 @@
 #define TIFF_INT64_FORMAT "%ld"
 
 /* Unsigned 64-bit type formatter */
-#define TIFF_UINT64_FORMAT "%lu"
+#define TIFF_UINT64_FORMAT "%llu"
 
 /* Pointer difference type formatter */
 #define TIFF_PTRDIFF_FORMAT "%ld"

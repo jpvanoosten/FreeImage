@@ -1,6 +1,12 @@
+# See: https://github.com/madler/zlib for offical ZLib distribution.
 cmake_minimum_required( VERSION 3.23.0 ) # Current version of CMake when this file was created.
 
-project( ZLib LANGUAGES C )
+set( ZLIB_VERSION_MAJOR 1 )
+set( ZLIB_VERSION_MINOR 2 )
+set( ZLIB_VERSION_PATCH 11 )
+set( ZLIB_VERSION ${ZLIB_VERSION_MAJOR}.${ZLIB_VERSION_MINOR}.${ZLIB_VERSION_PATCH} )
+
+project( ZLib VERSION ${ZLIB_VERSION} LANGUAGES C )
 
 set( HEADER_FILES
 	crc32.h
